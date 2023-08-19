@@ -1,0 +1,21 @@
+Group 2 Week 2 Approach/Algorithm :
+Step 1: Create a BST. Take input of all the node values and push
+	all the elements into a BST
+Step 2: Perform Inorder Traversal. Inorder traversal of BST will 
+	always be in ascending order. So we perform inorder traversal 
+	and store all the inorder traversal in a array(vector)
+Step 3: Now the resultant array of after the inorder order travesal is
+	min heap in array representation. 
+Step 4: Now we will build an Heap tree using the heap array 
+		1st child - 2i
+		2nd child - 2i + 1
+	In this way we access the children elements and make heap 
+Step 5: Perform Level Order Traversal
+
+Time Complexity:
+	Let 'n' be number of nodes then
+	O(n log(n) + 3n) ~ O(n log(n))
+		n log n - to create BST
+		2n - O(n) for inorder traveral and O(2n) for Level order traveral
+Space Complexity: O(3n) 
+		- to create heap and BST and queue
