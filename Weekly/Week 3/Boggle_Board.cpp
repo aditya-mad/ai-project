@@ -3,8 +3,8 @@
 #include <vector>
 using namespace std;
 
-void allIO(vector<vector<char>> &, unordered_map<char, vector<pair<int, int>>> &, int &, int &);
-void checkAllWords(vector<vector<char>> &, unordered_map<char, vector<pair<int, int>>> &, vector<string> &, vector<string> &, int &, int &);
+void allIO(vector<vector<char>> &, int &, int &);
+void checkAllWords(vector<vector<char>> &, vector<string> &, vector<string> &, int &, int &);
 bool isWordPossible(vector<vector<char>> &, string &, vector<vector<bool>> &, int &, int &, int, int, int);
 void printAns(vector<string> &);
 
@@ -14,39 +14,40 @@ int main()
     cin >> m >> n;
 
     vector<vector<char>> board(m, vector<char>(n));
-    unordered_map<char, vector<pair<int, int>>> keys;
     vector<string> words = {"START", "NOTE", "SAND", "STONED"};
     vector<string> ans;
 
-    allIO(board, keys, m, n);
-    checkAllWords(board, keys, words, ans, m, n);
+    allIO(board, m, n);
+    checkAllWords(board, words, ans, m, n);
     printAns(ans);
 
     return 0;
 }
 
-void allIO(vector<vector<char>> &board, unordered_map<char, vector<pair<int, int>>> &keys, int &m, int &n)
+void allIO(vector<vector<char>> &board, int &m, int &n)
 {
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
             cin >> board[i][j];
-            keys[board[i][j]].push_back(make_pair(i, j));
         }
     }
 }
 
-void checkAllWords(vector<vector<char>> &board, unordered_map<char, vector<pair<int, int>>> &keys, vector<string> &words, vector<string> &ans, int &m, int &n)
+void checkAllWords(vector<vector<char>> &board, vector<string> &words, vector<string> &ans, int &m, int &n)
 {
-    for (auto x : words)
+    for (string word : words)
     {
         vector<vector<bool>> visited(m, vector<bool>(n, false));
 
-        for (auto y : keys[x[0]])
+        for (int i = 0; i < m; i++)
         {
-            if (isWordPossible(board, x, visited, m, n, y.first, y.second, 0))
-                ans.push_back(x);
+            for (int j = 0; j < n; j++)
+            {
+                if (word[0] == board[i][j] && isWordPossible(board, word, visited, m, n, i, j, 0))
+                    ans.push_back(word);
+            }
         }
     }
 }
