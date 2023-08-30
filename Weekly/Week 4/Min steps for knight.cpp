@@ -1,4 +1,4 @@
-// min steps for knight to reach destination from source
+// min steps for knight to reach destination from source/.
 #include <iostream>
 #include <vector>
 using namespace std;
