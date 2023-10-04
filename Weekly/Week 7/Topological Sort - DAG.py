@@ -6,7 +6,7 @@ for i in range(nodes):  # input adjacency matrix
     adj_matrix[i] = list(map(int, input().split()))
 
 
-def get_nodes():  # Get the node with zero incoming edges, i.e indegree = 0
+def get_nodes():  # Get the node with indegree = 0
     zero_node = -1
 
     for i in range(nodes):
@@ -32,7 +32,7 @@ def topological_sort():
     print(current_node + 1, end=" ")
 
     adj_matrix[current_node] = [0 for _ in range(nodes)]  # removing the connections from the node
-    adj_matrix[current_node][current_node] = -1  # updating it to -1 so ambiguity doesn't occur
+    adj_matrix[current_node][current_node] = -1  # updating so that -1 so that ambiguity doesn't occur
 
     topological_sort()  # recall the function to continue
 
