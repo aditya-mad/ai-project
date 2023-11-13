@@ -1,7 +1,7 @@
 Variable Naming:
 NEVER LEAVE VAR NAMES WITH VAGUE NAMES: {CAN CHANGE LATER}
 -> Global variables - ALL_CAPS
--> Class / Compund names - PascalCaseNaming  
+-> Class / Compundnames - PascalCaseNaming
 -> Function name - camelCaseNaming
 -> Local variables, Parameters  - all_smalls_with_underscore
 -> Leftovers - Capital_with_underscore
