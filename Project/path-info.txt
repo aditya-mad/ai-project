@@ -1,5 +1,7 @@
-Hyd Vij
-Vij Gun
-Gun Ten
-Ten Hyd
-Ten Vij
+Hyderabad Vijayawada
+Vijayawada Hyderabad
+Vijayawada Guntur
+Guntur Vijayawada
+Guntur Mangalagiri
+Mangalagiri Tenali
+Tenali Vijayawada

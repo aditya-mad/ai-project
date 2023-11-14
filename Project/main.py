@@ -1,4 +1,4 @@
-import heapq
+import time
 
 
 class DynamicSourceRouting:
@@ -67,19 +67,22 @@ class DynamicSourceRouting:
 
     def sendPacket(self, nodes):
         if self.isPathInCache(nodes):
-            print(f"Sent from {nodes[0]} to {nodes[1]} in path - ", self.cache[nodes[0]][nodes[1]])
+            print(f"Packet sent from {nodes[0]} to {nodes[1]} in path - ", self.cache[nodes[0]][nodes[1]])
             return
+        # time.sleep(2)
         best_path = self.findShortestPath(nodes[0], nodes[1])
         if len(best_path) == 0:
-            print("Cannot send")
+            print("Packet dropped - no path")
         else:
+            best_path.insert(0, nodes[0])
             self.updatePathInCache(best_path)
-            print("Sent")
+            print("Sent in path - ", self.cache[nodes[0]][nodes[1]])
 
     def runPackets(self):
         for current_packet in self.all_operations:
+            # time.sleep(2)
             if current_packet[0] == 'Break':
-                print("Link is broken and corresponding caches are removed")
+                print(f"{current_packet[1]} - {current_packet[2]} Link is broken and corresponding caches are removed")
                 self.breakLink(current_packet[1:])
                 continue
             if current_packet[0] == 'Add':

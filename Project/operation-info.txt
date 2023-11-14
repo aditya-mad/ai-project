@@ -1,5 +1,8 @@
-Send Hyd Ten
-Send Vij Gun
-Send Hyd Ten
-Break Ten Vij
-Send Ten Vij
+Send Hyderabad Tenali
+Send Vijayawada Guntur
+Send Mangalagiri Hyderabad
+Send Tenali Hyderabad
+Break Vijayawada Hyderabad
+Send Tenali Hyderabad
+Add Vijayawada Hyderabad
+Send Tenali Hyderabad
