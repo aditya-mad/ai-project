@@ -1,7 +1,9 @@
-Hyderabad Vijayawada
-Vijayawada Hyderabad
-Vijayawada Guntur
-Guntur Vijayawada
-Guntur Mangalagiri
-Mangalagiri Tenali
-Tenali Vijayawada
+India Dubai
+Dubai India
+Dubai London
+London Dubai
+London USA
+USA Australia
+Australia Japan
+Japan Australia
+Japan Dubai

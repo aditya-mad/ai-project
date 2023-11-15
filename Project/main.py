@@ -1,13 +1,7 @@
-import time
-
-
-class DynamicSourceRouting:
+class PacketRoutePlanning:
     def __init__(self):
         self.servers, self.cache = {}, {}
         self.all_operations = []
-        self.makeGraph()
-        self.askPath()
-        self.runPackets()
 
     def makeGraph(self):
         with open('path-info.txt', 'r') as connections:
@@ -41,6 +35,19 @@ class DynamicSourceRouting:
             for links in remove:
                 self.cache[server].pop(links)
 
+    def clearCache(self):
+        self.cache.clear()
+        for server in self.servers:
+            self.cache[server] = {}
+
+    def printPath(self, path):
+        print("[ ", end="")
+        for server in range(len(path)):
+            if server == len(path) - 1:
+                print(path[server], " ]")
+                continue
+            print(f"{path[server]} -> ", end="")
+
     def breakLink(self, nodes):
         self.removePathInCache(nodes)
         if nodes[1] in self.servers[nodes[0]]:
@@ -67,27 +74,29 @@ class DynamicSourceRouting:
 
     def sendPacket(self, nodes):
         if self.isPathInCache(nodes):
-            print(f"Packet sent from {nodes[0]} to {nodes[1]} in path - ", self.cache[nodes[0]][nodes[1]])
+            # print(f"Packet sent from {nodes[0]} to {nodes[1]} in path - ", self.cache[nodes[0]][nodes[1]])
+            print(f"[{nodes[0]} to {nodes[1]}] cache path: ", end="")
+            self.printPath(self.cache[nodes[0]][nodes[1]])
             return
-        # time.sleep(2)
         best_path = self.findShortestPath(nodes[0], nodes[1])
         if len(best_path) == 0:
-            print("Packet dropped - no path")
+            print(f"[{nodes[0]} to {nodes[1]}] Packet dropped - no path")
         else:
             best_path.insert(0, nodes[0])
             self.updatePathInCache(best_path)
-            print("Sent in path - ", self.cache[nodes[0]][nodes[1]])
+            print(f"[{nodes[0]} to {nodes[1]}] calculated path: ", end="")
+            self.printPath(self.cache[nodes[0]][nodes[1]])
 
     def runPackets(self):
         for current_packet in self.all_operations:
-            # time.sleep(2)
             if current_packet[0] == 'Break':
-                print(f"{current_packet[1]} - {current_packet[2]} Link is broken and corresponding caches are removed")
+                print(f"[{current_packet[1]} - {current_packet[2]}] Link is removed")
                 self.breakLink(current_packet[1:])
                 continue
             if current_packet[0] == 'Add':
-                print("Link is added back")
+                print(f"[{current_packet[1]} - {current_packet[2]}] Link is added")
                 self.addLink(current_packet[1:])
+                self.clearCache()
                 continue
             if current_packet[0] == 'Send':
                 self.sendPacket(current_packet[1:])
@@ -95,4 +104,8 @@ class DynamicSourceRouting:
 
 
 if __name__ == '__main__':
-    channel = DynamicSourceRouting()
+    channel = PacketRoutePlanning()
+    channel.makeGraph()
+    channel.askPath()
+    channel.runPackets()
+
